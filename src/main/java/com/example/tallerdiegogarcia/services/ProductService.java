@@ -10,4 +10,6 @@ public interface ProductService {
 	public Iterable<Product> findAll();
 	public Optional<Product> findById(Integer id);
 	public void delete(Product product);
+	public Product addProduct(Product product);
+	public Product editProduct(Product product);
 }

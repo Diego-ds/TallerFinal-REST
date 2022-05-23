@@ -39,6 +39,11 @@ public class ProductServiceImp implements ProductService {
 			return productRepository.save(product);
 		}
 	}
+	
+	@Override
+	public Product addProduct(Product product) {
+		return productRepository.save(product);
+	}
 
 	@Override
 	public Product editProduct(Product product,Integer subCategoryID) {
@@ -83,6 +88,19 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public void delete(Product product) {
 		productRepository.delete(product);
+	}
+
+	@Override
+	public Product editProduct(Product product) {
+		Product oldProduct = productRepository.findById(product.getProductid()).get();
+		oldProduct.setName(product.getName());
+		oldProduct.setProductnumber(product.getProductnumber());
+		oldProduct.setSize(product.getSize());
+		oldProduct.setWeight(product.getWeight());
+		oldProduct.setSellstartdate(product.getSellstartdate());
+		oldProduct.setSellenddate(product.getSellenddate());
+		oldProduct.setProductid(product.getProductid());
+		return productRepository.save(oldProduct);	
 	}
 
 
