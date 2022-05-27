@@ -75,7 +75,7 @@ public class WorkOrderControllerImp implements WorkOrderController {
 				 model.addAttribute("products", productService.findAll());
 				 return "/workorders/add-workorder";
 			}
-			orderService.addWorkOrder(workorder, workorder.getProduct().getProductid());
+			orderService.addWorkOrder(workorder);
 		}
 		return "redirect:/workorders/";		
 	}
@@ -105,7 +105,7 @@ public class WorkOrderControllerImp implements WorkOrderController {
 				return "workorders/update-workorder";
 			 }else {
 				workorder.setWorkorderid(id);
-				orderService.editWorkOrder(workorder,workorder.getProduct().getProductid());
+				orderService.editWorkOrder(workorder);
 			 }
 			model.addAttribute("workorders", orderService.findAll());	
 		}

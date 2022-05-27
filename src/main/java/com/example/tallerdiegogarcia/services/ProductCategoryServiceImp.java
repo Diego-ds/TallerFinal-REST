@@ -5,25 +5,21 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.tallerdiegogarcia.dao.interfaces.CategoryDao;
 import com.example.tallerdiegogarcia.model.Productcategory;
-import com.example.tallerdiegogarcia.repositories.ProductCategoryRepository;
 import com.example.tallerdiegogarcia.repositories.ProductSubCategoryRepository;
 
 @Service
+@Transactional
 public class ProductCategoryServiceImp implements ProductCategoryService {
 	
 	
-	ProductCategoryRepository repository;
-	ProductSubCategoryRepository subRepository;
-	
-	
 	@Autowired
-	public ProductCategoryServiceImp(ProductCategoryRepository repository, ProductSubCategoryRepository subRepository) {
-		super();
-		this.repository = repository;
-		this.subRepository = subRepository;
-	}
+	CategoryDao categoryDao;
+	@Autowired
+	ProductSubCategoryRepository subRepository;
 
 	@Override
 	public Productcategory addProductCategory(Productcategory productcategory) {
@@ -31,7 +27,8 @@ public class ProductCategoryServiceImp implements ProductCategoryService {
 			if(productcategory.getName().length() < 3) {
 				throw new IllegalArgumentException();
 			}else {
-				return repository.save(productcategory);
+				 categoryDao.save(productcategory);
+				 return productcategory;
 			}
 		}else {
 			throw new IllegalArgumentException();
@@ -40,51 +37,25 @@ public class ProductCategoryServiceImp implements ProductCategoryService {
 
 	@Override
 	public Productcategory editProductCategory(Productcategory productcategory) {
-		if(productcategory != null) {
-			Productcategory oldCategory = repository.findById(productcategory.getProductcategoryid()).get();
-			if(oldCategory!=null) {
-				if(productcategory.getName().length() < 3) {
-					throw new IllegalArgumentException();
-				}else {
-					oldCategory.setName(productcategory.getName());
-					oldCategory.setModifieddate(productcategory.getModifieddate());
-					oldCategory.setRowguid(productcategory.getRowguid());
-					oldCategory.setProductcategoryid(productcategory.getProductcategoryid());
-					repository.save(oldCategory);
-					return oldCategory;
-				}
-			}else {
-				throw new IllegalArgumentException();
-			}
-		}else {
-			throw new IllegalArgumentException();
-		}	
+		categoryDao.update(productcategory);	
+		return productcategory;
 	}
 	
-	@Override
-	public Productcategory findCategory(Integer id) {
-		/*Iterator <Productcategory> it = repository.findAll().iterator();
-		while(it.hasNext()) {
-			Productcategory pt = it.next();
-			System.out.println(pt.getName() + " "+pt.getProductcategoryid());			
-		}*/
-		return repository.findById(id).get();
-	}
 
 	@Override
 	public Iterable<Productcategory> findAll() {
-		return repository.findAll();
+		return categoryDao.findAll();
 	}
 
 	@Override
 	public Optional<Productcategory> findById(Integer id) {
-		return repository.findById(id);
+		return Optional.of(categoryDao.findById(id));
 	}
 
 	@Override
 	public void delete(Productcategory productcategory) {
 		if(subRepository.findByProductcategoryProductcategoryid(productcategory.getProductcategoryid()).isEmpty()) {
-			repository.delete(productcategory);
+			categoryDao.delete(productcategory);
 		}else {
 			throw new IllegalArgumentException();
 		}

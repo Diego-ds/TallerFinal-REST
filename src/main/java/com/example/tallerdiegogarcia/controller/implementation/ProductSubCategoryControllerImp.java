@@ -87,7 +87,7 @@ public class ProductSubCategoryControllerImp implements ProductSubCategoryContro
 				 model.addAttribute("categories", categoryService.findAll());
 				 return "/subcategories/add-subcategory";
 			}
-			subCategoryService.addProductSubCategory(productsubcategory, productsubcategory.getProductcategory().getProductcategoryid());
+			subCategoryService.addProductSubCategory(productsubcategory);
 		}
 		return "redirect:/subcategories/";
 		
@@ -116,7 +116,7 @@ public class ProductSubCategoryControllerImp implements ProductSubCategoryContro
 				return "subcategories/update-subcategory";
 			 }else {
 				subcat.setProductsubcategoryid(id);
-				subCategoryService.editProductSubCategory(subcat, subcat.getProductcategory().getProductcategoryid());
+				subCategoryService.editProductSubCategory(subcat);
 			 }
 			model.addAttribute("subcategories", subCategoryService.findAll());	
 		}

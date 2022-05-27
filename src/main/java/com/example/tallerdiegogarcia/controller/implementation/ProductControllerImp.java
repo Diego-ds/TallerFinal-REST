@@ -81,7 +81,7 @@ public class ProductControllerImp implements ProductController {
 				 model.addAttribute("subcategories", subCategoryService.findAll());
 					return "/products/add-product";
 				 }
-			 productService.addProduct(product, product.getProductsubcategory().getProductsubcategoryid());
+			 productService.addProduct(product);
 		}
 		return "redirect:/products/";
 		
@@ -137,7 +137,7 @@ public class ProductControllerImp implements ProductController {
 				return "products/update-product";
 			 }else {
 				product.setProductid(id);
-				productService.editProduct(product,product.getProductsubcategory().getProductsubcategoryid());	
+				productService.editProduct(product);	
 			 }
 			model.addAttribute("products", productService.findAll());	
 		}

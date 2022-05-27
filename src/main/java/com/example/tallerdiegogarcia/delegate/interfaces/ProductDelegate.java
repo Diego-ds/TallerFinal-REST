@@ -1,13 +1,13 @@
-package com.example.tallerdiegogarcia.services;
+package com.example.tallerdiegogarcia.delegate.interfaces;
 
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.model.Product;
 
-public interface ProductService {
+public interface ProductDelegate {
 	public Iterable<Product> findAll();
 	public Optional<Product> findById(Integer id);
 	public void delete(Product product);
 	public Product addProduct(Product product);
-	public Product editProduct(Product product);
+	public void editProduct(Product product);
 }

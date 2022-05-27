@@ -42,8 +42,8 @@ public class ProductRestController {
 	}
 	
 	@PutMapping("/productRest")
-	public Product updateCar(@RequestBody Product car){
-		return productService.editProduct(car, null);
+	public Product updateProduct(@RequestBody Product prod){
+		return productService.editProduct(prod);
 	}
 	
 }
