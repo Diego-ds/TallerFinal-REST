@@ -17,8 +17,7 @@ public class CategoryDelegateImp implements CategoryDelegate {
 	RestTemplate template;
 	
 	public static final String WEB_PATH = "http://localhost:8080/categoryRest/";
-	
-	
+
 
 	@Override
 	public Productcategory addProductCategory(Productcategory productcategory) {

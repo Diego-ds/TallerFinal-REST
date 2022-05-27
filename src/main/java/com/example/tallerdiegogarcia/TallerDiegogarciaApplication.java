@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import com.example.tallerdiegogarcia.model.Product;
@@ -29,12 +30,18 @@ public class TallerDiegogarciaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TallerDiegogarciaApplication.class, args);
 	}
+	
+	@Bean
+	public RestTemplate getTemplate() {
+		return new RestTemplate();
+	}
+
 	@Bean
 	public CommandLineRunner dummy(ProductRepository repo,ProductSubCategoryRepository subcat,ProductCategoryRepository cat,UserRepository userRepository) {
 
 		return (args) -> {
 			//Entities for testing
-			/*UserWeb user1 = new UserWeb();
+			UserWeb user1 = new UserWeb();
 			user1.setPassword("{noop}admin");
 			user1.setUsername("admin");
 			user1.setType(UserType.ADMIN);
@@ -59,7 +66,7 @@ public class TallerDiegogarciaApplication {
 			p.setSellenddate(LocalDate.of(2022, 05, 15));
 			p.setProductnumber("15");
 			p.setProductsubcategory(s);
-			repo.save(p);*/
+			repo.save(p);
 		};
 	}
 }
