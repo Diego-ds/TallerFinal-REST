@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.tallerdiegogarcia.controller.interfaces.ProductCategoryController;
+import com.example.tallerdiegogarcia.delegate.interfaces.CategoryDelegate;
 import com.example.tallerdiegogarcia.model.Productcategory;
 import com.example.tallerdiegogarcia.services.ProductCategoryService;
 import com.example.tallerdiegogarcia.validate.CategoryValidation;
@@ -23,12 +24,8 @@ import com.example.tallerdiegogarcia.validate.CategoryValidation;
 @Controller
 public class ProductCategoryControllerImp implements ProductCategoryController {
 	
-	ProductCategoryService service;
-	
 	@Autowired
-	public ProductCategoryControllerImp(ProductCategoryService service) {
-		this.service = service;
-	}
+	CategoryDelegate service;
 
 	@GetMapping("/categories/add")
 	public String addCategory(Model model) {

@@ -16,7 +16,7 @@ public class WorkOrderDelegateImp implements WorkOrderDelegate {
 	@Autowired
 	RestTemplate template;
 	
-	public static final String WEB_PATH = "http://localhost:8080/workorderRest/";
+	public static final String WEB_PATH = "http://localhost:8080/api/workorderRest/";
 	
 
 	@Override
@@ -26,7 +26,7 @@ public class WorkOrderDelegateImp implements WorkOrderDelegate {
 
 	@Override
 	public void editWorkOrder(Workorder workorder) {
-		template.put(WEB_PATH+workorder.getWorkorderid(), workorder);
+		template.put(WEB_PATH, workorder);
 	}
 
 	@Override

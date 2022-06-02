@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.example.tallerdiegogarcia.validate.SubCategoryValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The persistent class for the productsubcategory database table.
@@ -40,6 +41,7 @@ public class Productsubcategory implements Serializable {
 
 	// bi-directional many-to-one association to Product
 	@OneToMany(mappedBy = "productsubcategory")
+	@JsonIgnore
 	private List<Product> products;
 
 	// bi-directional many-to-one association to Productcategory

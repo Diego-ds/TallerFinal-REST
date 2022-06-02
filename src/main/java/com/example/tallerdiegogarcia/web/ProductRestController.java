@@ -20,28 +20,28 @@ public class ProductRestController {
 	@Autowired
 	ProductService productService;
 	
-	@RequestMapping("/productRest")
+	@RequestMapping("/api/productRest/")
 	public Iterable<Product> getProducts() {
 		return productService.findAll();
 	}
 	
-	@PostMapping("/productRest")
+	@PostMapping("/api/productRest/")
 	public void addProduct(@RequestBody Product prod) {
 		productService.addProduct(prod);
 	}
 	
-	@GetMapping("/productRest/{id}")
+	@GetMapping("/api/productRest/{id}")
 	public Optional<Product> getProduct(@PathVariable Integer id){
 		return productService.findById(id);
 	}
 	
-	@DeleteMapping("/productRest/{id}")
+	@DeleteMapping("/api/productRest/{id}")
 	public void deleteProduct(@PathVariable Integer id) {
 		Product p = productService.findById(id).get();
 		productService.delete(p);
 	}
 	
-	@PutMapping("/productRest")
+	@PutMapping("/api/productRest/")
 	public Product updateProduct(@RequestBody Product prod){
 		return productService.editProduct(prod);
 	}

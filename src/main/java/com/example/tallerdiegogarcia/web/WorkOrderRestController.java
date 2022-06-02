@@ -22,28 +22,28 @@ public class WorkOrderRestController {
 	@Autowired
 	WorkOrderService orderService;
 	
-	@RequestMapping("/workorderRest")
+	@RequestMapping("/api/workorderRest/")
 	public Iterable<Workorder> getWorkorders() {
 		return orderService.findAll();
 	}
 	
-	@PostMapping("/workorderRest")
+	@PostMapping("/api/workorderRest/")
 	public void addWorkorder(@RequestBody Workorder prod) {
 		orderService.addWorkOrder(prod);
 	}
 	
-	@GetMapping("/workorderRest/{id}")
+	@GetMapping("/api/workorderRest/{id}")
 	public Optional<Workorder> getWorkorder(@PathVariable Integer id){
 		return orderService.findById(id);
 	}
 	
-	@DeleteMapping("/workorderRest/{id}")
+	@DeleteMapping("/api/workorderRest/{id}")
 	public void deleteWorkorder(@PathVariable Integer id) {
 		Workorder p = orderService.findById(id).get();
 		orderService.delete(p);
 	}
 	
-	@PutMapping("/workorderRest")
+	@PutMapping("/api/workorderRest/")
 	public Workorder updateWorkorder(@RequestBody Workorder prod){
 		return orderService.editWorkOrder(prod);
 	}

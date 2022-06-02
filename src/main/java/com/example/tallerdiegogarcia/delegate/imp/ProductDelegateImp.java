@@ -16,7 +16,7 @@ public class ProductDelegateImp implements ProductDelegate {
 	@Autowired
 	RestTemplate template;
 	
-	public static final String WEB_PATH = "http://localhost:8080/productRest/";
+	public static final String WEB_PATH = "http://localhost:8080/api/productRest/";
 
 	@Override
 	public Iterable<Product> findAll() {

@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.tallerdiegogarcia.validate.ProductValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 /**
@@ -114,6 +115,7 @@ public class Product implements Serializable {
 
 	// bi-directional many-to-one association to Workorder
 	@OneToMany(mappedBy = "product")
+	@JsonIgnore
 	private List<Workorder> workorders;
 
 	public Product() {

@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 
 import com.example.tallerdiegogarcia.validate.CategoryValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The persistent class for the productcategory database table.
@@ -37,6 +38,7 @@ public class Productcategory implements Serializable {
 
 	// bi-directional many-to-one association to Productsubcategory
 	@OneToMany(mappedBy = "productcategory")
+	@JsonIgnore
 	private List<Productsubcategory> productsubcategories;
 
 	public Productcategory() {

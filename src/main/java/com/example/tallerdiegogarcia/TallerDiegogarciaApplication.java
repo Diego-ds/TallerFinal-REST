@@ -1,11 +1,17 @@
 package com.example.tallerdiegogarcia;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
@@ -33,7 +39,13 @@ public class TallerDiegogarciaApplication {
 	
 	@Bean
 	public RestTemplate getTemplate() {
-		return new RestTemplate();
+		RestTemplate template = new RestTemplate();
+		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
+		messageConverters.add(converter);
+		template.setMessageConverters(messageConverters);
+		return template;
 	}
 
 	@Bean
@@ -54,6 +66,9 @@ public class TallerDiegogarciaApplication {
 			Productcategory c = new Productcategory();
 			c.setName("Lacteos");
 			cat.save(c);
+			Productcategory c2 = new Productcategory();
+			c2.setName("Aseo");
+			cat.save(c2);
 			Productsubcategory s = new Productsubcategory();
 			s.setName("Yougurts");
 			s.setProductcategory(c);

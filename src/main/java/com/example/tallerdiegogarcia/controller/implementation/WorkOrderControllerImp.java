@@ -15,24 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.tallerdiegogarcia.controller.interfaces.WorkOrderController;
+import com.example.tallerdiegogarcia.delegate.interfaces.ProductDelegate;
+import com.example.tallerdiegogarcia.delegate.interfaces.WorkOrderDelegate;
 import com.example.tallerdiegogarcia.model.Product;
 import com.example.tallerdiegogarcia.model.Workorder;
-import com.example.tallerdiegogarcia.services.ProductService;
-import com.example.tallerdiegogarcia.services.WorkOrderService;
 import com.example.tallerdiegogarcia.validate.WorkOrderValidation;
 
 @Controller
 public class WorkOrderControllerImp implements WorkOrderController {
-
-	ProductService productService;
-	WorkOrderService orderService;
 	
 	@Autowired
-	public WorkOrderControllerImp(ProductService productService, WorkOrderService orderService) {
-		super();
-		this.productService = productService;
-		this.orderService = orderService;
-	}
+	ProductDelegate productService;
+	@Autowired
+	WorkOrderDelegate orderService;
+	
 
 	@GetMapping("/workorders/add")
 	public String addWorkorder(Model model) {

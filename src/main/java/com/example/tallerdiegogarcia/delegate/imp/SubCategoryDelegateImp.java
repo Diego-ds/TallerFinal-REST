@@ -16,7 +16,7 @@ public class SubCategoryDelegateImp implements SubCategoryDelegate {
 	@Autowired
 	RestTemplate template;
 	
-	public static final String WEB_PATH = "http://localhost:8080/subcategoryRest/";
+	public static final String WEB_PATH = "http://localhost:8080/api/subcategoryRest/";
 
 
 	@Override

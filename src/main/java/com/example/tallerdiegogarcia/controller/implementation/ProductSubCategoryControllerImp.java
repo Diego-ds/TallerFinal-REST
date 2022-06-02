@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.tallerdiegogarcia.controller.interfaces.ProductSubCategoryController;
+import com.example.tallerdiegogarcia.delegate.interfaces.CategoryDelegate;
+import com.example.tallerdiegogarcia.delegate.interfaces.SubCategoryDelegate;
 import com.example.tallerdiegogarcia.model.Productcategory;
 import com.example.tallerdiegogarcia.model.Productsubcategory;
 import com.example.tallerdiegogarcia.services.ProductCategoryService;
@@ -25,15 +27,10 @@ import com.example.tallerdiegogarcia.validate.SubCategoryValidation;
 @Controller
 public class ProductSubCategoryControllerImp implements ProductSubCategoryController {
 	
-	ProductSubCategoryService subCategoryService;
-	ProductCategoryService categoryService;
-	
 	@Autowired
-	public ProductSubCategoryControllerImp(ProductSubCategoryService subCategoryService,
-			ProductCategoryService categoryService) {
-		this.subCategoryService = subCategoryService;
-		this.categoryService = categoryService;
-	}
+	SubCategoryDelegate subCategoryService;
+	@Autowired
+	CategoryDelegate categoryService;
 
 	@GetMapping("/subcategories/add")
 	public String addSubCategory(Model model) {

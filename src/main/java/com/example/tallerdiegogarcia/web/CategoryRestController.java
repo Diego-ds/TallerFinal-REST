@@ -22,28 +22,28 @@ public class CategoryRestController {
 	@Autowired
 	ProductCategoryService categoryService;
 	
-	@RequestMapping("/categoryRest")
+	@RequestMapping("/api/categoryRest/")
 	public Iterable<Productcategory> getCategories() {
 		return categoryService.findAll();
 	}
 	
-	@PostMapping("/categoryRest")
+	@PostMapping("/api/categoryRest/")
 	public void addCategory(@RequestBody Productcategory prod) {
 		categoryService.addProductCategory(prod);
 	}
 	
-	@GetMapping("/categoryRest/{id}")
+	@GetMapping("/api/categoryRest/{id}")
 	public Optional<Productcategory> getCategory(@PathVariable Integer id){
 		return categoryService.findById(id);
 	}
 	
-	@DeleteMapping("/categoryRest/{id}")
+	@DeleteMapping("/api/categoryRest/{id}")
 	public void deleteCategory(@PathVariable Integer id) {
 		Productcategory p = categoryService.findById(id).get();
 		categoryService.delete(p);
 	}
 	
-	@PutMapping("/categoryRest")
+	@PutMapping("/api/categoryRest/")
 	public Productcategory updateCategory(@RequestBody Productcategory prod){
 		return categoryService.editProductCategory(prod);
 	}

@@ -35,16 +35,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		httpSecurity.csrf().disable();
 		
 		/*httpSecurity.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and()
 		.logout().invalidateHttpSession(true).clearAuthentication(true)
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-		.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/	
-		httpSecurity.authorizeRequests().antMatchers("/categories/**").hasRole("ADMIN").antMatchers("/subcategories/**")
+		.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
+		/*httpSecurity.authorizeRequests().antMatchers("/api/**").permitAll().antMatchers("/categories/**").hasRole("ADMIN").antMatchers("/subcategories/**")
 				.hasRole("ADMIN").antMatchers("/products/**").hasRole("OPERATOR").antMatchers("/workorders/**")
 				.hasRole("OPERATOR").anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and()
 				.logout().invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);*/
 	}
 }

@@ -21,28 +21,28 @@ public class SubCategoryRestController {
 	@Autowired
 	ProductSubCategoryService subcatService;
 	
-	@RequestMapping("/subcategoryRest")
+	@RequestMapping("/api/subcategoryRest/")
 	public Iterable<Productsubcategory> getSubCategories() {
 		return subcatService.findAll();
 	}
 	
-	@PostMapping("/subcategoryRest")
+	@PostMapping("/api/subcategoryRest/")
 	public void addCategory(@RequestBody Productsubcategory prod) {
 		subcatService.addProductSubCategory(prod);
 	}
 	
-	@GetMapping("/subcategoryRest/{id}")
+	@GetMapping("/api/subcategoryRest/{id}")
 	public Optional<Productsubcategory> getCategory(@PathVariable Integer id){
 		return subcatService.findById(id);
 	}
 	
-	@DeleteMapping("/subcategoryRest/{id}")
+	@DeleteMapping("/api/subcategoryRest/{id}")
 	public void deleteCategory(@PathVariable Integer id) {
 		Productsubcategory p = subcatService.findById(id).get();
 		subcatService.delete(p);
 	}
 	
-	@PutMapping("/subcategoryRest")
+	@PutMapping("/api/subcategoryRest/")
 	public Productsubcategory updateCategory(@RequestBody Productsubcategory prod){
 		return subcatService.editProductSubCategory(prod);
 	}
