@@ -1,6 +1,7 @@
 package com.example.tallerdiegogarcia.delegate.imp;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,11 @@ public class ProductDelegateImp implements ProductDelegate {
 	public void editProduct(Product product) {
 		template.put(WEB_PATH, product);
 	}
-
+	
+	@Override
+	public List<Product> findBySubcategory(Integer id){
+		String url = "http://localhost:8080/api/productRest/associated/";
+		Product [] products = template.getForObject(url+id,Product[].class);
+		return Arrays.asList(products);
+	}
 }

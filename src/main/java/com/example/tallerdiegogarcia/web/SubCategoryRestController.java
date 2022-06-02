@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,11 @@ public class SubCategoryRestController {
 	@RequestMapping("/api/subcategoryRest/")
 	public Iterable<Productsubcategory> getSubCategories() {
 		return subcatService.findAll();
+	}
+	
+	@GetMapping("/api/subcategoryRest/associated/{id}")
+	public List<Productsubcategory> getByCategory(@PathVariable Integer id) {
+		return subcatService.findByCategory(id);
 	}
 	
 	@PostMapping("/api/subcategoryRest/")
