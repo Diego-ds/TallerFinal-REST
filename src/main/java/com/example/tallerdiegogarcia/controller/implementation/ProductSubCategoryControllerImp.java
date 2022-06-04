@@ -20,8 +20,6 @@ import com.example.tallerdiegogarcia.delegate.interfaces.CategoryDelegate;
 import com.example.tallerdiegogarcia.delegate.interfaces.SubCategoryDelegate;
 import com.example.tallerdiegogarcia.model.Productcategory;
 import com.example.tallerdiegogarcia.model.Productsubcategory;
-import com.example.tallerdiegogarcia.services.ProductCategoryService;
-import com.example.tallerdiegogarcia.services.ProductSubCategoryService;
 import com.example.tallerdiegogarcia.validate.SubCategoryValidation;
 
 @Controller
@@ -54,10 +52,7 @@ public class ProductSubCategoryControllerImp implements ProductSubCategoryContro
 	
 	@GetMapping("/subcategories/associated/{id}")
 	public String associatedCategory(@PathVariable("id") Integer id, Model model) {
-		Productcategory category = categoryService.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid subcategory Id:" + id));
-		
-		model.addAttribute("subcategories", category.getProductsubcategories());
+		model.addAttribute("subcategories", subCategoryService.findByCategory(id));
 		return "subcategories/index";
 	}
 	

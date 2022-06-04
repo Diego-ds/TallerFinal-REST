@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,11 @@ public class ProductSubCategoryServiceImp implements ProductSubCategoryService {
 		}else {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	@Override
+	public List<Productsubcategory> findByCategory(Integer id) {
+		return subDao.findByCategory(id);
 	}
 
 }

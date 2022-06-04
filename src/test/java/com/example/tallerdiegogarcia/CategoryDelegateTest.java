@@ -13,8 +13,6 @@ import org.springframework.web.client.RestTemplate;
 import com.example.tallerdiegogarcia.delegate.imp.CategoryDelegateImp;
 import com.example.tallerdiegogarcia.model.Productcategory;
 
-
-
 @SpringBootTest
 class CategoryDelegateTest {
 

@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.model.Product;
@@ -10,4 +11,5 @@ public interface ProductService {
 	public void delete(Product product);
 	public Product addProduct(Product product);
 	public Product editProduct(Product product);
+	public List<Product> findBySubcategory(Integer id);
 }

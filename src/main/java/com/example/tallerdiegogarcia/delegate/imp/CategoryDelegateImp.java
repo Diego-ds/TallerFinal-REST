@@ -36,8 +36,7 @@ public class CategoryDelegateImp implements CategoryDelegate {
 	@Override
 	public Iterable<Productcategory> findAll() {
 		//probando
-		/*
-		List<Productcategory> listcat = new ArrayList();
+		/*List<Productcategory> listcat = new ArrayList();
 		Iterable <Productcategory> categoriesResponse = null;
 		System.out.println(template.getMessageConverters().size());
 		ResponseEntity<Productcategory[]> response = template.getForEntity(WEB_PATH,Productcategory[].class);

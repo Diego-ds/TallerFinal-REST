@@ -25,7 +25,7 @@ public class ProductDaoImp implements ProductDao {
 
 	@Override
 	public void save(Product prod) {
-		entityManager.persist(prod);		
+		entityManager.persist(prod);
 	}
 
 	@Override

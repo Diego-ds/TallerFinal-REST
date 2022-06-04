@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,10 @@ public class ProductServiceImp implements ProductService {
 		productDao.update(product);
 		return product;	
 	}
-
-
+	
+	@Override
+	public List<Product> findBySubcategory(Integer id){
+		return productDao.findBySubcategoryid(id);
+	}
 
 }

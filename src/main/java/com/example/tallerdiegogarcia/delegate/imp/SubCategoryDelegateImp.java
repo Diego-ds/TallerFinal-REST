@@ -1,6 +1,7 @@
 package com.example.tallerdiegogarcia.delegate.imp;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,13 @@ public class SubCategoryDelegateImp implements SubCategoryDelegate {
 	@Override
 	public void delete(Productsubcategory productsubcategory) {
         template.delete(WEB_PATH+productsubcategory.getProductsubcategoryid()); 
+	}
+
+	@Override
+	public List<Productsubcategory> findByCategory(Integer id) {
+		String uri = "http://localhost:8080/api/subcategoryRest/associated/";
+		Productsubcategory [] subcategories = template.getForObject(uri+id,Productsubcategory[].class);
+		return Arrays.asList(subcategories);
 	}
 
 }

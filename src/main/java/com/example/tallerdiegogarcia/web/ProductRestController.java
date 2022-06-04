@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class ProductRestController {
 	@GetMapping("/api/productRest/{id}")
 	public Optional<Product> getProduct(@PathVariable Integer id){
 		return productService.findById(id);
+	}
+	
+	@GetMapping("/api/productRest/associated/{id}")
+	public List<Product> getBySubcategory(@PathVariable Integer id){
+		return productService.findBySubcategory(id);
 	}
 	
 	@DeleteMapping("/api/productRest/{id}")
