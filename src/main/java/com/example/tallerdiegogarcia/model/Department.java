@@ -15,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.example.tallerdiegogarcia.validate.DepartmentValidation;
 import com.example.tallerdiegogarcia.validate.ProductValidation;
 
@@ -36,6 +38,7 @@ public class Department implements Serializable {
 	private String groupname;
 	
 	@Past (groups = DepartmentValidation.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate modifieddate;
 
 	@NotBlank (groups = DepartmentValidation.class)

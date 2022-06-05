@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.tallerdiegogarcia.controller.interfaces.DepartmentController;
 import com.example.tallerdiegogarcia.delegate.interfaces.DepartmentDelegate;
+import com.example.tallerdiegogarcia.delegate.interfaces.DepartmenthistoryDelegate;
 import com.example.tallerdiegogarcia.model.Department;
+import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
 import com.example.tallerdiegogarcia.validate.DepartmentValidation;
 
 @Controller
@@ -25,6 +27,8 @@ public class DepartmentControllerImp implements DepartmentController {
 	
 	@Autowired
 	DepartmentDelegate departmentService;
+	@Autowired
+	DepartmenthistoryDelegate historyService;
 
 	@GetMapping("/departments/add")
 	public String addDepartment(Model model) {
@@ -49,7 +53,7 @@ public class DepartmentControllerImp implements DepartmentController {
 
 	@PostMapping("/departments/add")
 	public String saveDepartment( @Validated(DepartmentValidation.class) 
-			@ModelAttribute Department department, 
+			@ModelAttribute Department department,
 			BindingResult bindingResult, Model model, 
 			@RequestParam(value = "action", required = true) String action) {
 		
@@ -73,9 +77,9 @@ public class DepartmentControllerImp implements DepartmentController {
 		return "departments/update-department";
 	}
 	
-	@GetMapping("/departmenthistories/associated/{id}")
-	public String associatedHistories(@PathVariable("id") Integer id, Model model) {
-		Department dep = departmentService.findById(id)
+	@GetMapping("/departments/associated/{id}")
+	public String associatedHistory(@PathVariable("id") Integer id, Model model) {
+		Employeedepartmenthistory dep = historyService.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid department history Id:" + id));
 		
 		model.addAttribute("departments", dep);

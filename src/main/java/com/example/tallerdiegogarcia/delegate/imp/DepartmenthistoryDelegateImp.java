@@ -1,8 +1,10 @@
 package com.example.tallerdiegogarcia.delegate.imp;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.delegate.interfaces.DepartmenthistoryDelegate;
+import com.example.tallerdiegogarcia.model.Department;
 import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,8 @@ public class DepartmenthistoryDelegateImp implements DepartmenthistoryDelegate{
 	
 	@Override
 	public Iterable<Employeedepartmenthistory> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Employeedepartmenthistory[] history = template.getForObject(WEB_PATH,Employeedepartmenthistory[].class);
+		return Arrays.asList(history);
 	}
 
 	@Override
