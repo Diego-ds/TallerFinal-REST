@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.tallerdiegogarcia.validate.ProductValidation;
+import com.example.tallerdiegogarcia.validate.QueryValidation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -72,11 +73,11 @@ public class Product implements Serializable {
 
 	private Integer safetystocklevel;
 	
-	@NotNull (groups = ProductValidation.class)
+	@NotNull (groups = {ProductValidation.class,QueryValidation.class})
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date sellenddate;
 
-	@NotNull (groups = ProductValidation.class)
+	@NotNull (groups = {ProductValidation.class,QueryValidation.class})
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date sellstartdate;
 	

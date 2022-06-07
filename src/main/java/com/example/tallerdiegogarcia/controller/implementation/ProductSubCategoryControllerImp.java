@@ -22,6 +22,8 @@ import com.example.tallerdiegogarcia.delegate.interfaces.SubCategoryDelegate;
 import com.example.tallerdiegogarcia.model.Product;
 import com.example.tallerdiegogarcia.model.Productcategory;
 import com.example.tallerdiegogarcia.model.Productsubcategory;
+import com.example.tallerdiegogarcia.validate.ProductValidation;
+import com.example.tallerdiegogarcia.validate.QueryValidation;
 import com.example.tallerdiegogarcia.validate.SubCategoryValidation;
 
 @Controller
@@ -100,8 +102,10 @@ public class ProductSubCategoryControllerImp implements ProductSubCategoryContro
 	}
 
 	@PostMapping("/subcategories/edit/{id}")
-	public String updateSubCategory(@PathVariable("id") Integer id, @RequestParam(value = "action", required = true) String action,
-			@Validated(SubCategoryValidation.class) @ModelAttribute Productsubcategory subcat,BindingResult bindingResult , Model model) {
+	public String updateSubCategory(@PathVariable("id") Integer id, 
+			@RequestParam(value = "action", required = true) String action,
+			@Validated(SubCategoryValidation.class) @ModelAttribute Productsubcategory subcat,
+			BindingResult bindingResult , Model model) {
 		if (action != null && !action.equals("Cancel")) {
 			 if (bindingResult.hasErrors()) {
 				model.addAttribute("subcategory", subcat);
@@ -126,9 +130,9 @@ public class ProductSubCategoryControllerImp implements ProductSubCategoryContro
 	}
 	
 	@PostMapping("/subcategories/custom-query") 
-	public String queryInformation(@ModelAttribute Product product, Model model,
-			BindingResult bindingResult,@RequestParam(value = "action", required = true) 
-	String action) {
+	public String queryInformation(@RequestParam(value = "action", required = true) 
+	String action, @ModelAttribute @Validated (QueryValidation.class) 
+	Product product, BindingResult bindingResult, Model model) {
 		
 		if (action != null && !action.equals("Cancel")) {
 			if (product.getSellstartdate() != null && product.getSellenddate() != null) {
