@@ -32,6 +32,10 @@ public class SubCategoryRestController {
 		return subcatService.findByCategory(id);
 	}
 	
+	@GetMapping("/api/subcategoryRest/datesandcategoryquery/")
+	public List<Productsubcategory> findByCategoryAndDates() {
+		return subcatService.findbyDateAndCategories(null, null, null);
+	}
 	@PostMapping("/api/subcategoryRest/")
 	public void addCategory(@RequestBody Productsubcategory prod) {
 		subcatService.addProductSubCategory(prod);
@@ -41,6 +45,7 @@ public class SubCategoryRestController {
 	public Optional<Productsubcategory> getCategory(@PathVariable Integer id){
 		return subcatService.findById(id);
 	}
+	
 	
 	@DeleteMapping("/api/subcategoryRest/{id}")
 	public void deleteCategory(@PathVariable Integer id) {

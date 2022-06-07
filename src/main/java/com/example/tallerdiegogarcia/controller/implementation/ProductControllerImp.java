@@ -47,7 +47,7 @@ public class ProductControllerImp implements ProductController {
 		Product product = productService.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		productService.delete(product);
-		model.addAttribute("users", productService.findAll());
+		model.addAttribute("products", productService.findAll());
 		return "products/index";
 	}
 
@@ -96,6 +96,12 @@ public class ProductControllerImp implements ProductController {
 	@GetMapping("/products/associated/{id}")
 	public String associatedSub(@PathVariable("id") Integer id, Model model) {	
 		model.addAttribute("products", productService.findBySubcategory(id));
+		return "products/index";
+	}
+	
+	@GetMapping("/products/orderqtyquery")
+	public String customQueryOrderQty(Model model) {	
+		model.addAttribute("products", productService.findByWorkorderQuantity());
 		return "products/index";
 	}
 	

@@ -52,4 +52,11 @@ public class ProductDelegateImp implements ProductDelegate {
 		Product [] products = template.getForObject(url+id,Product[].class);
 		return Arrays.asList(products);
 	}
+
+	@Override
+	public List<Product> findByWorkorderQuantity() {
+		String url = "http://localhost:8080/api/productRest/orderqtyquery/";
+		Product [] products = template.getForObject(url,Product[].class);
+		return Arrays.asList(products);
+	}
 }

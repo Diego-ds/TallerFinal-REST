@@ -40,6 +40,10 @@ public class ProductRestController {
 	public List<Product> getBySubcategory(@PathVariable Integer id){
 		return productService.findBySubcategory(id);
 	}
+	@GetMapping("/api/productRest/orderqtyquery/")
+	public List<Product> findByWorkorderQuantity() {
+		return productService.findByWorkorderQuantity();
+	}
 	
 	@DeleteMapping("/api/productRest/{id}")
 	public void deleteProduct(@PathVariable Integer id) {

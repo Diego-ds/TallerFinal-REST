@@ -12,4 +12,5 @@ public interface ProductService {
 	public Product addProduct(Product product);
 	public Product editProduct(Product product);
 	public List<Product> findBySubcategory(Integer id);
+	public List<Product> findByWorkorderQuantity();
 }

@@ -50,4 +50,9 @@ public class ProductServiceImp implements ProductService {
 		return productDao.findBySubcategoryid(id);
 	}
 
+	@Override
+	public List<Product> findByWorkorderQuantity() {
+		return productDao.findByWorkorderQuantity();
+	}
+
 }
