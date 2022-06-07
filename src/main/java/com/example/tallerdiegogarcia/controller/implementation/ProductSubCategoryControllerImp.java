@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.tallerdiegogarcia.controller.interfaces.ProductSubCategoryController;
 import com.example.tallerdiegogarcia.delegate.interfaces.CategoryDelegate;
 import com.example.tallerdiegogarcia.delegate.interfaces.SubCategoryDelegate;
+import com.example.tallerdiegogarcia.model.Product;
 import com.example.tallerdiegogarcia.model.Productcategory;
 import com.example.tallerdiegogarcia.model.Productsubcategory;
 import com.example.tallerdiegogarcia.validate.SubCategoryValidation;
@@ -116,4 +118,40 @@ public class ProductSubCategoryControllerImp implements ProductSubCategoryContro
 		return "redirect:/subcategories/";
 	}
 	
+	@GetMapping("/subcategories/custom-query")
+	public String customQuery(Model model) {
+		model.addAttribute("product",new Product());
+		model.addAttribute("categories", categoryService.findAll());
+		return "subcategories/input-query";
+	}
+	
+	@PostMapping("/subcategories/custom-query") 
+	public String queryInformation(@ModelAttribute Product product, Model model,
+			BindingResult bindingResult,@RequestParam(value = "action", required = true) 
+	String action) {
+		
+		if (action != null && !action.equals("Cancel")) {
+			if (product.getSellstartdate() != null && product.getSellenddate() != null) {
+				if (product.getSellstartdate().after(product.getSellenddate())) {
+					bindingResult.addError(new FieldError("product", "sellstartdate",
+							"La fecha de venta inicial debe ser menor a la fecha final"));
+				}
+			} 
+			
+			List<Productsubcategory> subcategories = new ArrayList<Productsubcategory>();
+			
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("categories", categoryService.findAll());
+				return "subcategories/input-query";
+			 }else {
+					subcategories = subCategoryService.findByCategoryAndDates(
+							product.getProductsubcategory().getProductcategory().
+							getProductcategoryid(), product.getSellstartdate(), product.getSellenddate());
+			 }
+			
+			model.addAttribute("subcategories", subcategories);	
+		}
+		
+		return "subcategories/index-query";
+	}
 }

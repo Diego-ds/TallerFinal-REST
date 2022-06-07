@@ -60,7 +60,7 @@ public class ProductControllerImp implements ProductController {
 	@PostMapping("/products/add")
 	public String saveProduct( @Validated(ProductValidation.class) @ModelAttribute Product product, BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
 		if (!action.equals("Cancel")) {
-			if(product.getSellstartdate().isAfter(product.getSellenddate())) {
+			if(product.getSellstartdate().after(product.getSellenddate())) {
 				bindingResult.addError(new FieldError("product","sellstartdate","La fecha de inicio de venta debe ser menor a la fecha final"));
 			}
 			if(product.getProductsubcategory()==null) {
@@ -121,7 +121,7 @@ public class ProductControllerImp implements ProductController {
 	public String updateProduct(@PathVariable("id") Integer id, @RequestParam(value = "action", required = true) String action,
 			@Validated(ProductValidation.class) @ModelAttribute Product product,BindingResult bindingResult , Model model) {
 		if (action != null && !action.equals("Cancel")) {
-			if(product.getSellstartdate().isAfter(product.getSellenddate())) {
+			if(product.getSellstartdate().after(product.getSellenddate())) {
 				bindingResult.addError(new FieldError("product","sellstartdate","La fecha de inicio de venta debe ser menor a la fecha final"));
 			}
 			if(product.getProductsubcategory()==null) {

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -73,11 +74,11 @@ public class Product implements Serializable {
 	
 	@NotNull (groups = ProductValidation.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate sellenddate;
+	private Date sellenddate;
 
 	@NotNull (groups = ProductValidation.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate sellstartdate;
+	private Date sellstartdate;
 	
 	@NotNull (groups = ProductValidation.class)
 	@Min(value = 1, groups = ProductValidation.class)
@@ -202,11 +203,11 @@ public class Product implements Serializable {
 		return this.safetystocklevel;
 	}
 
-	public LocalDate getSellenddate() {
+	public Date getSellenddate() {
 		return this.sellenddate;
 	}
 
-	public LocalDate getSellstartdate() {
+	public Date getSellstartdate() {
 		return this.sellstartdate;
 	}
 
@@ -319,11 +320,11 @@ public class Product implements Serializable {
 		this.safetystocklevel = safetystocklevel;
 	}
 
-	public void setSellenddate(LocalDate sellenddate) {
+	public void setSellenddate(Date sellenddate) {
 		this.sellenddate = sellenddate;
 	}
 
-	public void setSellstartdate(LocalDate sellstartdate) {
+	public void setSellstartdate(Date sellstartdate) {
 		this.sellstartdate = sellstartdate;
 	}
 

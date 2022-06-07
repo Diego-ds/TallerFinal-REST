@@ -2,6 +2,7 @@ package com.example.tallerdiegogarcia.services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,11 +70,13 @@ public class ProductSubCategoryServiceImp implements ProductSubCategoryService {
 	}
 
 	@Override
-	public List<Productsubcategory> findbyDateAndCategories(Integer categoryId, LocalDate sellstartdate, LocalDate sellenddate) {
+	public List<Productsubcategory> findbyDateAndCategories(Integer categoryId, Date sellstartdate, Date sellenddate) {
 		List<Productsubcategory> subcategories = new ArrayList<Productsubcategory>();
 		List<Object[]> lista = subDao.findbyDateAndCategories(categoryId, sellstartdate, sellenddate);
 		for(Object[] o:lista) {
-			subcategories.add((Productsubcategory) o[0]);
+			Productsubcategory aux = (Productsubcategory) o[0];
+			aux.setCount((Integer) o[1]);
+			subcategories.add(aux);
 		}
 		return subcategories;
 	}

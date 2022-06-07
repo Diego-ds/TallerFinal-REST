@@ -1,6 +1,7 @@
 package com.example.tallerdiegogarcia.dao.imp;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -68,8 +69,8 @@ public class SubcategoryDaoImp implements SubcategoryDao {
 	}
 
 	@Override
-	public List<Object[]> findbyDateAndCategories(Integer categoryId, LocalDate sellstartdate, LocalDate sellenddate) {
-		String request = "SELECT ps, SIZE(ps.products)"
+	public List<Object[]> findbyDateAndCategories(Integer categoryId, Date sellstartdate, Date sellenddate) {
+		String request = "SELECT DISTINCT ps, SIZE(ps.products)"
                 + "FROM Productsubcategory ps, Product pr "
                 + "WHERE pr MEMBER OF ps.products "
                 + "AND ps.productcategory.productcategoryid=:categoryId "

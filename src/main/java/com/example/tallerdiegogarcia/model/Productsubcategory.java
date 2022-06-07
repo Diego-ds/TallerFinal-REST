@@ -50,6 +50,8 @@ public class Productsubcategory implements Serializable {
 	@NotNull(message="Seleccione o agregue una categoria",groups= {SubCategoryValidation.class})
 	private Productcategory productcategory;
 
+	private Integer count;
+	
 	public Productsubcategory() {
 	}
 
@@ -113,6 +115,16 @@ public class Productsubcategory implements Serializable {
 
 	public void setRowguid(Integer rowguid) {
 		this.rowguid = rowguid;
+	}
+
+	public Integer getCount() {
+		return count;
+		
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+		
 	}
 
 }

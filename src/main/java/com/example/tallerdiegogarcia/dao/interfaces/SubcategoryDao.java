@@ -1,6 +1,7 @@
 package com.example.tallerdiegogarcia.dao.interfaces;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.example.tallerdiegogarcia.model.Productsubcategory;
@@ -13,6 +14,6 @@ public interface SubcategoryDao {
 	public Productsubcategory findById(Integer id);
 	public List<Productsubcategory> findByName(String name);
 	public List<Productsubcategory> findByCategory(Integer id);
-	public List<Object[]> findbyDateAndCategories(Integer categoryId,LocalDate sellstartdate,
-            LocalDate sellenddate);
+	public List<Object[]> findbyDateAndCategories(Integer categoryId,Date sellstartdate,
+            Date sellenddate);
 }

@@ -3,6 +3,7 @@ package com.example.tallerdiegogarcia;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -16,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import com.example.tallerdiegogarcia.dao.interfaces.DepartmentDao;
-import com.example.tallerdiegogarcia.model.Department;
 import com.example.tallerdiegogarcia.model.Employee;
 import com.example.tallerdiegogarcia.model.Product;
 import com.example.tallerdiegogarcia.model.Productcategory;
@@ -83,8 +83,8 @@ public class TallerDiegogarciaApplication {
 			p.setName("Colanta fresa");
 			p.setSize(10);
 			p.setWeight(5);
-			p.setSellstartdate(LocalDate.of(2022, 04, 01));
-			p.setSellenddate(LocalDate.of(2022, 05, 15));
+			p.setSellstartdate(new Date());
+			p.setSellenddate(new Date());
 			p.setProductnumber("15");
 			p.setProductsubcategory(s);
 			repo.save(p);

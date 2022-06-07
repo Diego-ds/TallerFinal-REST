@@ -1,5 +1,8 @@
 package com.example.tallerdiegogarcia.web;
 
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +35,29 @@ public class SubCategoryRestController {
 		return subcatService.findByCategory(id);
 	}
 	
-	@GetMapping("/api/subcategoryRest/datesandcategoryquery/")
-	public List<Productsubcategory> findByCategoryAndDates() {
-		return subcatService.findbyDateAndCategories(null, null, null);
+	@GetMapping("/api/subcategoryRest/datesandcategoryquery/{id}/{startdate}/{enddate}")
+	public List<Productsubcategory> findByCategoryAndDates(@PathVariable String id,
+			@PathVariable String startdate, @PathVariable String enddate) {
+		Timestamp sdate = new Timestamp(0);
+        Timestamp edate = new Timestamp(0);
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+
+            Date sdateParsed = dateFormat.parse(startdate);
+            Date edateParsed = dateFormat.parse(enddate);
+
+            sdate = new java.sql.Timestamp(sdateParsed.getTime());
+            edate = new java.sql.Timestamp(edateParsed.getTime());
+
+
+        } catch(Exception e) { 
+
+        }
+        
+        Integer categoryid = Integer.parseInt(id);
+        
+		return subcatService.findbyDateAndCategories(categoryid, sdate, edate);
 	}
 	@PostMapping("/api/subcategoryRest/")
 	public void addCategory(@RequestBody Productsubcategory prod) {

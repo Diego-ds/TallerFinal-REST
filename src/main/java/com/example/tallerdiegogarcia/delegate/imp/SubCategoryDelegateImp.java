@@ -1,6 +1,9 @@
 package com.example.tallerdiegogarcia.delegate.imp;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +54,18 @@ public class SubCategoryDelegateImp implements SubCategoryDelegate {
 	public List<Productsubcategory> findByCategory(Integer id) {
 		String uri = "http://localhost:8080/api/subcategoryRest/associated/";
 		Productsubcategory [] subcategories = template.getForObject(uri+id,Productsubcategory[].class);
+		return Arrays.asList(subcategories);
+	}
+	
+	@Override
+	public List<Productsubcategory> findByCategoryAndDates(Integer id, Date startdate, Date enddate) {
+		
+		Timestamp timestampStart = new Timestamp(startdate.getTime());
+        Timestamp timestampEnd = new Timestamp(enddate.getTime());
+		
+		String uri = "datesandcategoryquery/";
+		
+		Productsubcategory [] subcategories = template.getForObject(WEB_PATH+uri+id+"/"+timestampStart+"/"+timestampEnd,Productsubcategory[].class);
 		return Arrays.asList(subcategories);
 	}
 

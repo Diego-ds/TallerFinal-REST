@@ -41,8 +41,8 @@
 							<tr th:each="product : ${products}">
 								<td th:text="${product.name}"></td>
 								<td th:text="${product.productnumber}"></td>
-								<td th:text="${#temporals.format(product.sellstartdate,'dd/MM/yyyy')}"></td>
-								<td th:text="${#temporals.format(product.sellenddate,'dd/MM/yyyy')}"></td>
+								<td th:text="${product.sellstartdate}"></td>
+								<td th:text="${product.sellenddate}"></td>
 								<td th:text="${product.size}"></td>
 								<td th:text="${product.weight}"></td>
 								<td><a th:href="@{/subcategories/show/{id}(id=${product.productsubcategory.productsubcategoryid})}"
