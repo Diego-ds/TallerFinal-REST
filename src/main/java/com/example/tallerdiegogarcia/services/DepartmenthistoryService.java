@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
@@ -10,4 +11,5 @@ public interface DepartmenthistoryService {
 	public void delete(Employeedepartmenthistory history);
 	public Employeedepartmenthistory addDepartmenthistory(Employeedepartmenthistory history);
 	public Employeedepartmenthistory editDepartmenthistory(Employeedepartmenthistory history);
+	public List<Employeedepartmenthistory> findByDepartment(Integer id);
 }

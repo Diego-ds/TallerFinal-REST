@@ -52,7 +52,7 @@ public class DepartmentControllerImp implements DepartmentController {
 	}
 
 	@PostMapping("/departments/add")
-	public String saveDepartment( @Validated(DepartmentValidation.class) 
+	public String saveDepartment( @Validated(value = DepartmentValidation.class) 
 			@ModelAttribute Department department,
 			BindingResult bindingResult, Model model, 
 			@RequestParam(value = "action", required = true) String action) {

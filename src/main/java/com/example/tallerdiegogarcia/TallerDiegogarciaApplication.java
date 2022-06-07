@@ -15,6 +15,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import com.example.tallerdiegogarcia.dao.interfaces.DepartmentDao;
+import com.example.tallerdiegogarcia.model.Department;
 import com.example.tallerdiegogarcia.model.Employee;
 import com.example.tallerdiegogarcia.model.Product;
 import com.example.tallerdiegogarcia.model.Productcategory;
@@ -52,7 +54,8 @@ public class TallerDiegogarciaApplication {
 
 	@Bean
 	public CommandLineRunner dummy(ProductRepository repo,ProductSubCategoryRepository subcat,
-			ProductCategoryRepository cat,UserRepository userRepository, EmployeeRepository empRepo) {
+			ProductCategoryRepository cat,UserRepository userRepository, EmployeeRepository empRepo,
+			DepartmentDao depDao) {
 
 		return (args) -> {
 			//Entities for testing
@@ -87,12 +90,21 @@ public class TallerDiegogarciaApplication {
 			repo.save(p);
 			Employee emp1 = new Employee();
 			emp1.setLoginid("Alejandro");
+			emp1.setGender("Male");
+			emp1.setMaritalstatus("Engaged");
+			emp1.setJobtitle("Project Manager");
 			empRepo.save(emp1);
 			Employee emp2 = new Employee();
 			emp2.setLoginid("Diego");
+			emp2.setGender("Male");
+			emp2.setMaritalstatus("Single");
+			emp2.setJobtitle("TI Manager");
 			empRepo.save(emp2);
 			Employee emp3 = new Employee();
-			emp3.setLoginid("Romulo");
+			emp3.setLoginid("Laura");
+			emp3.setGender("Female");
+			emp3.setMaritalstatus("Divorced");
+			emp3.setJobtitle("Secretary");
 			empRepo.save(emp3);
 		};
 	}

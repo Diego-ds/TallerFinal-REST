@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
@@ -45,6 +46,11 @@ public class DepartmenthistoryRestController {
 	@PutMapping("/api/departmenthistoryRest/")
 	public Employeedepartmenthistory updateCategory(@RequestBody Employeedepartmenthistory prod){
 		return historyService.editDepartmenthistory(prod);
+	}
+	
+	@GetMapping("/api/departmenthistoryRest/associated/{id}")
+	public List<Employeedepartmenthistory> findByDepartment(@PathVariable Integer id) {
+		return historyService.findByDepartment(id);
 	}
 	
 }

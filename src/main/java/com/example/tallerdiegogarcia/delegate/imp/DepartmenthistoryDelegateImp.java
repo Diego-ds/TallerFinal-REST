@@ -1,6 +1,7 @@
 package com.example.tallerdiegogarcia.delegate.imp;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.delegate.interfaces.DepartmenthistoryDelegate;
@@ -9,6 +10,8 @@ import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 @Component
@@ -44,6 +47,14 @@ public class DepartmenthistoryDelegateImp implements DepartmenthistoryDelegate{
 	@Override
 	public void editDepartmenthistory(Employeedepartmenthistory edh) {
 		template.put(WEB_PATH, edh);
+	}
+	
+	@Override
+	public List<Employeedepartmenthistory> findByDepartment(Integer id) {
+		String url = WEB_PATH + "associated/" + id;
+		
+		Employeedepartmenthistory[] history = template.getForObject(url,Employeedepartmenthistory[].class);
+		return Arrays.asList(history);
 	}
 
 }

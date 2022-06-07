@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import com.example.tallerdiegogarcia.dao.interfaces.DepartmenthistoryDao;
 import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
+import com.example.tallerdiegogarcia.model.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,5 +51,12 @@ public class DepartmenthistoryDaoImp implements DepartmenthistoryDao {
 		// TODO Auto-generated method stub
 		return entityManager.find(Employeedepartmenthistory.class, id);
 	}
+	
+	@Override
+    public List<Employeedepartmenthistory> findByDepartment(Integer id) {
+        String request = "SELECT e FROM Employeedepartmenthistory e WHERE e.department.departmentid = :id";
+        TypedQuery<Employeedepartmenthistory> query = entityManager.createQuery(request, Employeedepartmenthistory.class);
+        return     query.setParameter("id", id).getResultList();
+    }
 
 }

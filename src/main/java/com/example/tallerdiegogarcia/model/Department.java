@@ -13,12 +13,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.tallerdiegogarcia.validate.DepartmentValidation;
 import com.example.tallerdiegogarcia.validate.ProductValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * The persistent class for the department database table.
@@ -37,6 +39,7 @@ public class Department implements Serializable {
 	@NotBlank (groups = DepartmentValidation.class)
 	private String groupname;
 	
+	@NotNull (groups = DepartmentValidation.class)
 	@Past (groups = DepartmentValidation.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate modifieddate;
@@ -46,6 +49,7 @@ public class Department implements Serializable {
 
 	// bi-directional many-to-one association to Employeedepartmenthistory
 	@OneToMany(mappedBy = "department")
+	@JsonIgnore
 	private List<Employeedepartmenthistory> employeedepartmenthistories;
 
 	public Department() {

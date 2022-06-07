@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -43,5 +44,10 @@ public class DepartmenthistoryServiceImp implements DepartmenthistoryService{
 	public Employeedepartmenthistory editDepartmenthistory(Employeedepartmenthistory department) {
 		historyDao.update(department);
 		return department;
+	}
+	
+	@Override
+	public List<Employeedepartmenthistory> findByDepartment(Integer id) {
+		return historyDao.findByDepartment(id);
 	}
 }

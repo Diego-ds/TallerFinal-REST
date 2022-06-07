@@ -1,10 +1,8 @@
 package com.example.tallerdiegogarcia.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+
+import com.example.tallerdiegogarcia.validate.DepartmentValidation;
+import com.example.tallerdiegogarcia.validate.DepartmenthistoryValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,20 +34,24 @@ public class Employeedepartmenthistory implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_PRODUCTID_GENERATOR")
 	private Integer id;
 
-	@Temporal(TemporalType.DATE)
-	private Date enddate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull (groups = DepartmenthistoryValidation.class)
+	private LocalDate enddate;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Timestamp modifieddate;
+	@NotNull (groups = DepartmenthistoryValidation.class)
+	private LocalDate modifieddate;
 
 	// bi-directional many-to-one association to Department
+	@NotNull (groups = DepartmenthistoryValidation.class)
 	@ManyToOne
-	@JoinColumn(name = "departmentid", insertable = false, updatable = false)
+	@JoinColumn(name = "departmentid")
 	private Department department;
 
 	// bi-directional many-to-one association to Employee
+	@NotNull (groups = DepartmenthistoryValidation.class)
 	@ManyToOne
-	@JoinColumn(name = "businessentityid", insertable = false, updatable = false)
+	@JoinColumn(name = "businessentityid")
 	private Employee employee;
 
 	public Employeedepartmenthistory() {
@@ -59,7 +65,7 @@ public class Employeedepartmenthistory implements Serializable {
 		return this.employee;
 	}
 
-	public Date getEnddate() {
+	public LocalDate getEnddate() {
 		return this.enddate;
 	}
 
@@ -67,7 +73,7 @@ public class Employeedepartmenthistory implements Serializable {
 		return this.id;
 	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
@@ -79,7 +85,7 @@ public class Employeedepartmenthistory implements Serializable {
 		this.employee = employee;
 	}
 
-	public void setEnddate(Date enddate) {
+	public void setEnddate(LocalDate enddate) {
 		this.enddate = enddate;
 	}
 
@@ -87,7 +93,7 @@ public class Employeedepartmenthistory implements Serializable {
 		this.id = id;
 	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 

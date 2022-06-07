@@ -1,5 +1,6 @@
 package com.example.tallerdiegogarcia.delegate.interfaces;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.tallerdiegogarcia.model.Employeedepartmenthistory;
@@ -10,4 +11,5 @@ public interface DepartmenthistoryDelegate {
 	public void delete(Employeedepartmenthistory department);
 	public Employeedepartmenthistory addDepartmenthistory(Employeedepartmenthistory department);
 	public void editDepartmenthistory(Employeedepartmenthistory department);
+	public List<Employeedepartmenthistory> findByDepartment(Integer id);
 }

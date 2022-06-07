@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Add Product</title>
+<title>Add Department history</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -17,79 +17,59 @@
 </head>
 <body>
 	<div class="container my-5">
-		<h2 class="mb-5">New Product</h2>
+		<h2 class="mb-5">New Department history</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/products/add/}" th:object="${product}"
-					method="post">
+				<form action="#" th:action="@{/departmenthistories/add/}"
+					th:object="${employeedepartmenthistory}" method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="name" class="col-form-label">Name</label> <input
-								type="text" th:field="*{name}" class="form-control" id="name"
-								placeholder="Name"><span
-								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-								class="text-danger"></span>
+							<label for="modifieddate" class="col-form-label">Modified
+								date</label> <input type="date" th:field="*{modifieddate}"
+								class="form-control" id="modifieddate"> <span
+								th:if="${#fields.hasErrors('modifieddate')}"
+								th:errors="*{modifieddate}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="productnumber" class="col-form-label">Product Number</label> <input
-								type="text" th:field="*{productnumber}" class="form-control" id="productnumber"
-								placeholder="productnumber"> <span
-								th:if="${#fields.hasErrors('productnumber')}" th:errors="*{productnumber}"
+							<label for="enddate" class="col-form-label">End date</label> <input
+								type="date" th:field="*{enddate}" class="form-control"
+								id="enddate"> <span
+								th:if="${#fields.hasErrors('enddate')}" th:errors="*{enddate}"
 								class="text-danger"></span>
+							<div class="form-group col-md-6">
+								<label for="department" class="col-form-label">Department</label>
+								<select th:field="*{department.departmentid}">
+									<option th:each="dep : ${departments}"
+										th:value="${dep.departmentid}" class="form-control"
+										th:text="${dep.name}"
+										th:selected="${employeedepartmenthistory.department=dep}"></option>
+								</select> <span th:if="${#fields.hasErrors('department')}"
+									th:errors="*{department}" class="text-danger"></span>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="employee" class="col-form-label">Employee</label> <select
+									th:field="*{employee.businessentityid}">
+									<option th:each="emp : ${employees}"
+										th:value="${emp.businessentityid}" class="form-control"
+										th:text="${emp.loginid}"
+										th:selected="${employeedepartmenthistory.employee=emp}"></option>
+								</select> <span th:if="${#fields.hasErrors('employee')}"
+									th:errors="*{employee}" class="text-danger"></span>
+							</div>
 						</div>
-						<div class="form-group col-md-6">
-							<label for="sellstartdate" class="col-form-label">Sell start date</label> <input
-								type="date" th:field="*{sellstartdate}" class="form-control" id="sellstartdate"
-								> <span
-								th:if="${#fields.hasErrors('sellstartdate')}" th:errors="*{sellstartdate}"
-								class="text-danger"></span>
+						<div class="row">
+							<div class="col-md-6 mt-3">
+								<input type="submit" name="action" class="btn btn-primary"
+									value="Add Department History">
+							</div>
+							<div class="col-md-3 mt-3">
+								<input type="reset" class="btn btn-secondary" value="Clear">
+							</div>
+							<div class="col-md-3 mt-3">
+								<input type="submit" name="action" class="btn btn-secondary"
+									value="Cancel">
+							</div>
 						</div>
-						<div class="form-group col-md-6">
-							<label for="sellenddate" class="col-form-label">Sell end date</label> <input
-								type="date" th:field="*{sellenddate}" class="form-control" id="sellenddate"
-								> <span
-								th:if="${#fields.hasErrors('sellenddate')}" th:errors="*{sellenddate}"
-								class="text-danger"></span>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="size" class="col-form-label">Size</label> <input
-								type="text" th:field="*{size}" class="form-control" id="size"
-								> <span
-								th:if="${#fields.hasErrors('size')}" th:errors="*{size}"
-								class="text-danger"></span>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="weight" class="col-form-label">Weight</label> <input
-								type="text" th:field="*{weight}" class="form-control" id="weight"
-								> <span
-								th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"
-								class="text-danger"></span>
-						</div>
-						
-						<div class="form-group col-md-6">
-							<label for="subcategory" class="col-form-label">Sub Category</label> <select
-								th:field="*{productsubcategory}">
-								<option th:each="sub : ${subcategories}" th:value="${sub.productsubcategoryid}"
-									class="form-control" th:text="${sub.name}"
-									th:selected="${product.productsubcategory=sub}"></option>
-							</select> <span th:if="${#fields.hasErrors('productsubcategory')}"
-								th:errors="*{productsubcategory}" class="text-danger"></span>
-						</div>
-						<div></div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 mt-3">
-							<input type="submit" name="action" class="btn btn-primary"
-								value="Add Product">
-						</div>
-						<div class="col-md-3 mt-3">
-							<input type="reset" class="btn btn-secondary" value="Clear">
-						</div>
-						<div class="col-md-3 mt-3">
-							<input type="submit" name="action" class="btn btn-secondary"
-								value="Cancel">
-						</div>
-					</div>
 				</form>
 			</div>
 		</div>

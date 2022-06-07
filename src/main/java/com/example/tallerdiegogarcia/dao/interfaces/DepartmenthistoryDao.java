@@ -10,4 +10,5 @@ public interface DepartmenthistoryDao {
 	public void delete(Employeedepartmenthistory edh);
 	public List<Employeedepartmenthistory> findAll();
 	public Employeedepartmenthistory findById(Integer id);
+	public List<Employeedepartmenthistory> findByDepartment(Integer id);
 }

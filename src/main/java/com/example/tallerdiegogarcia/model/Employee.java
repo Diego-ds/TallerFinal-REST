@@ -15,6 +15,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the employee database table.
  *
@@ -61,6 +63,7 @@ public class Employee implements Serializable {
 
 	// bi-directional many-to-one association to Employeedepartmenthistory
 	@OneToMany(mappedBy = "employee")
+	@JsonIgnore
 	private List<Employeedepartmenthistory> employeedepartmenthistories;
 
 	public Employee() {
