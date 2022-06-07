@@ -16,6 +16,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The persistent class for the employeedepartmenthistory database table.
  *
@@ -33,6 +35,7 @@ public class Employeedepartmenthistory implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date enddate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp modifieddate;
 
 	// bi-directional many-to-one association to Department

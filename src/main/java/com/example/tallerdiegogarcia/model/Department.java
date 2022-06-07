@@ -2,6 +2,7 @@ package com.example.tallerdiegogarcia.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.tallerdiegogarcia.validate.DepartmentValidation;
+import com.example.tallerdiegogarcia.validate.ProductValidation;
 
 /**
  * The persistent class for the department database table.
@@ -26,10 +34,14 @@ public class Department implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DEPARTMENT_DEPARTMENTID_GENERATOR")
 	private Integer departmentid;
 
+	@NotBlank (groups = DepartmentValidation.class)
 	private String groupname;
+	
+	@Past (groups = DepartmentValidation.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate modifieddate;
 
-	private Timestamp modifieddate;
-
+	@NotBlank (groups = DepartmentValidation.class)
 	private String name;
 
 	// bi-directional many-to-one association to Employeedepartmenthistory
@@ -58,7 +70,7 @@ public class Department implements Serializable {
 		return this.groupname;
 	}
 
-	public Timestamp getModifieddate() {
+	public LocalDate getModifieddate() {
 		return this.modifieddate;
 	}
 
@@ -86,7 +98,7 @@ public class Department implements Serializable {
 		this.groupname = groupname;
 	}
 
-	public void setModifieddate(Timestamp modifieddate) {
+	public void setModifieddate(LocalDate modifieddate) {
 		this.modifieddate = modifieddate;
 	}
 

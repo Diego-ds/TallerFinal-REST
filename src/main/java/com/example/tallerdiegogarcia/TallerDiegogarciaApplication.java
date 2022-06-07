@@ -15,11 +15,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import com.example.tallerdiegogarcia.model.Employee;
 import com.example.tallerdiegogarcia.model.Product;
 import com.example.tallerdiegogarcia.model.Productcategory;
 import com.example.tallerdiegogarcia.model.Productsubcategory;
 import com.example.tallerdiegogarcia.model.UserType;
 import com.example.tallerdiegogarcia.model.UserWeb;
+import com.example.tallerdiegogarcia.repositories.EmployeeRepository;
 import com.example.tallerdiegogarcia.repositories.ProductCategoryRepository;
 import com.example.tallerdiegogarcia.repositories.ProductRepository;
 import com.example.tallerdiegogarcia.repositories.ProductSubCategoryRepository;
@@ -49,7 +51,8 @@ public class TallerDiegogarciaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner dummy(ProductRepository repo,ProductSubCategoryRepository subcat,ProductCategoryRepository cat,UserRepository userRepository) {
+	public CommandLineRunner dummy(ProductRepository repo,ProductSubCategoryRepository subcat,
+			ProductCategoryRepository cat,UserRepository userRepository, EmployeeRepository empRepo) {
 
 		return (args) -> {
 			//Entities for testing
@@ -82,6 +85,15 @@ public class TallerDiegogarciaApplication {
 			p.setProductnumber("15");
 			p.setProductsubcategory(s);
 			repo.save(p);
+			Employee emp1 = new Employee();
+			emp1.setLoginid("Alejandro");
+			empRepo.save(emp1);
+			Employee emp2 = new Employee();
+			emp2.setLoginid("Diego");
+			empRepo.save(emp2);
+			Employee emp3 = new Employee();
+			emp3.setLoginid("Romulo");
+			empRepo.save(emp3);
 		};
 	}
 }
